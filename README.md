@@ -9,6 +9,9 @@ Node.js (version 12.x or higher)
 npm (Node Package Manager) 
 
 
+Install Modules
+npm install
+
 Running the Application
 Once you've completed the installation and configuration steps, you can run the application locally.
 
