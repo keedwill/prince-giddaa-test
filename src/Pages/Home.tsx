@@ -1,5 +1,12 @@
+import BusinessOwnersAndInvestors from "../components/BusinessOwnersAndInvestors";
+import Footer from "../components/Footer";
+import GetStarted from "../components/GetStarted";
+import HowItWorks from "../components/HowItWorks";
+
 import Navbar from "../components/Navbar";
 import NoOfComponent from "../components/NoOfComponent";
+import PrivateSectorWorkers from "../components/PrivateSectorWorkers";
+import PublicSectorWorkers from "../components/PublicSectorWorkers";
 import PurchaseOptions from "../components/PurchaseOptions";
 import RemoteWorkers from "../components/RemoteWorkers";
 import TrustedByComponent from "../components/TrustedByComponent";
@@ -34,6 +41,9 @@ const data = [
 
 const Home = () => {
   return (
+    <>
+    
+    
     <div className="flex flex-col ">
       <Navbar />
 
@@ -79,10 +89,20 @@ const Home = () => {
 
       <PurchaseOptions />
 
-      <WhyGiddaa/>
-      <WhoWeServe/>
-      <RemoteWorkers/>
+      <WhyGiddaa />
+      <WhoWeServe />
+      <RemoteWorkers />
+      <PrivateSectorWorkers />
+      <PublicSectorWorkers />
+      <BusinessOwnersAndInvestors />
+      <HowItWorks />
+      <GetStarted />
+      <Footer />
+      <div className="w-full bg-white text-center font-bold p-2">
+        <h1 className="text-[#335f32] text-sm">PROPERTY OF GIDDAA INC.</h1>
+      </div>
     </div>
+    </>
   );
 };
 

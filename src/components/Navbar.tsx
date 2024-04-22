@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import SearchBar from "./SearchBar";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   // State to manage the navbar's visibility
@@ -18,6 +19,7 @@ const Navbar = () => {
     { id: 3, text: "Developers" },
     { id: 4, text: "Mortgage Banks" },
     { id: 5, text: "Consult an Expert" },
+    { id: 6, text: "Login" },
   ];
 
   return (
@@ -30,16 +32,27 @@ const Navbar = () => {
       {/* Desktop Navigation */}
       <ul className="hidden md:flex">
         {navItems.map((item) => (
-          <li
-            key={item.id}
-            className="p-4   m-2 cursor-pointer duration-300 text-[#4B4B4B] hover:text-[#335F32] hover:font-bold "
+          // <li
+          //   key={item.id}
+          //   className="p-4   m-2 cursor-pointer duration-300 text-[#4B4B4B] hover:text-[#335F32] hover:font-bold "
+          // >
+          //   {item.text}
+          // </li>
+          <NavLink
+            to={item.text === "Home" ? "/" : item.text}
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "p-4   m-2 cursor-pointer  text-[#335F32] font-bold "
+                : "p-4   m-2 cursor-pointer duration-300 text-[#4B4B4B] hover:text-[#335F32] hover:font-bold"
+            }
           >
             {item.text}
-          </li>
+          </NavLink>
         ))}
       </ul>
 
-      
       {/* Mobile Navigation Icon */}
       <div onClick={handleNav} className="block md:hidden cursor-pointer">
         {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}

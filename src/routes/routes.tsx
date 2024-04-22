@@ -1,27 +1,27 @@
 import {
+  createBrowserRouter,
   createRoutesFromElements,
-  createHashRouter,
- 
   Route,
 } from "react-router-dom";
 import Home from "../Pages/Home";
+import Login from "../components/Login";
+import PrivateRoute from "../components/PrivateRoute";
+import DashBoard from "../components/DashBoard";
 
-export const router = createHashRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<Home />}>
-      {/* <Route index element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/terms-conditions" element={<Terms />} />
-      <Route path="/privacy" element={<Privacy />} />
-      <Route path="/:service" element={<Service />} />
-      <Route path="/:category/:service" element={<MenuService />} /> */}
-    </Route>
-  )
+const routeElements = [
+  <Route path="/" element={<Home />} />,
+  <Route path="/login" element={<Login />} />,
+  <Route
+    path="/dashboard"
+    element={
+      <PrivateRoute>
+        <DashBoard />
+      </PrivateRoute>
+    }
+  />,
+];
+
+// Create routes from elements
+export const router = createBrowserRouter(
+  createRoutesFromElements(routeElements)
 );
-
-// export const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <Home/>,
-//   },
-// ]);

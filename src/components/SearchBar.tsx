@@ -6,7 +6,7 @@ const SearchBar = () => {
       <input
         type="text"
         id="search-navbar"
-        className="block w-[400px] rounded-full  pl-4 pe-10  text-xs h-[50px] focus:outline-none text-[#585858]   "
+        className="block w-[350px] rounded-full  pl-4 pe-10  text-xs h-[50px] focus:outline-none text-[#585858]   "
         placeholder="Search For Properties, Developers, Banks"
       />
 

@@ -1,38 +1,43 @@
 import { useState } from "react";
-import RemoteWorkersData from "../data/RemoteWorkers";
+import BusinessOwnersAndInvestorsData from "../data/BusinessOwnersAndInvestors";
 import Explanation from "./Explanation";
 
 
-const RemoteWorkers = () => {
-   const [showExplanation, setShowExplanation] = useState(false);
-   const [isRotated, setIsRotated] = useState(false);
-   const [ExplanationIndex, setExplanationIndex] = useState<number | null>(
-     null
-   );
-   const showExplanationModalHandler = (index: number) => {
-     setExplanationIndex(index);
-     setIsRotated((prevState) => !prevState);
-     setShowExplanation(!showExplanation);
-   };
+const BusinessOwnersAndInvestors = () => {
+    const [showExplanation, setShowExplanation] = useState(false);
+    const [isRotated, setIsRotated] = useState(false);
+    const [ExplanationIndex, setExplanationIndex] = useState<number | null>(
+      null
+    );
+    const showExplanationModalHandler = (index: number) => {
+      setExplanationIndex(index);
+      setIsRotated((prevState) => !prevState);
+      setShowExplanation(!showExplanation);
+    };
   return (
-    <div className="bg-[#F3FAF2]   p-[5%] grid grid-cols-1 md:grid-cols-2 mt-10 gap-8 md:gap-0  w-full">
+    <div className="bg-white   p-[5%] grid grid-cols-1 md:grid-cols-2  gap-8 md:gap-0  w-full">
       <div className="flex flex-col  gap-4  items-center md:items-start">
-        <img className="w-[100px] h-[100px]" src="laptop.svg" alt="" />
+        <img
+          className="w-[100px] h-[100px]"
+          src="privatesectorworkersicon.svg"
+          alt=""
+        />
         <h1
-          className=" md:text-[50px] text-[30px]  text-[#335F32] mt-4 text-center md:text-left "
+          className=" md:text-[50px] text-[30px] opacity-[30%]  text-[#0A7E32] mt-4 text-center md:text-left "
           style={{ fontFamily: "myFirstFont" }}
         >
           {" "}
-          Naija Remote Workers
+          Business Owners & Investors.
         </h1>
         <div className="md:pr-[10%] pr-0 mt-4">
-          Do you work from home? Your own Home? With Giddaa, that’s possible.
-          You don’t need to have all the money at once to buy a house to become
-          a homeowner. Leverage your job flexibility working remotely and your
-          current earning capacity to build equity in a home of your own.
+          Whether you’re a doctor, nurse, banker, tech bro or sis, or work in
+          another industry in the private sector, Giddaa assists individuals
+          looking to purchase property without straining their budget or
+          breaking the bank. In the face of rising property prices, we empower
+          middle-class individuals, like you, to achieve homeownership!
         </div>
         <div className="grid grid-cols-2  gap-4 w-full md:pr-[10%] pr-0">
-          {RemoteWorkersData.map((item, index) => (
+          {BusinessOwnersAndInvestorsData.map((item, index) => (
             <div
               key={index}
               className="    mt-6 text-[#335F32] cursor-pointer relative"
@@ -70,10 +75,10 @@ const RemoteWorkers = () => {
         </div>
       </div>
       <div className="">
-        <img src="remote.png" className="" alt="" />
+        <img src="privatesector.png" className="" alt="" />
       </div>
     </div>
   );
 }
 
-export default RemoteWorkers
+export default BusinessOwnersAndInvestors
