@@ -19,7 +19,7 @@ const Navbar = () => {
     { id: 3, text: "Developers" },
     { id: 4, text: "Mortgage Banks" },
     { id: 5, text: "Consult an Expert" },
-    { id: 6, text: "Login" },
+    { id: 6, text: "login" },
   ];
 
   return (

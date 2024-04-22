@@ -13,9 +13,7 @@ export type expectedTransactionType = {
     value?: {
       message: string;
       statusCode: number;
-      value: {
-        token: string;
-      };
+      data: []
     };
   };
   serverError?: {

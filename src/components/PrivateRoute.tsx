@@ -15,7 +15,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
   children,
 }: PrivateRouteProps) => {
   const token = useSelector((state: ReducersType) => state.token.token);
-  console.log(token);
+
   
   if (token === null) {
     return <Navigate to="/login" replace />;

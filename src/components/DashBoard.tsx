@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginSuccessAction } from "../redux/actions/loginSuccess.actions";
 import { getDefaultTransactionAction } from "../redux/actions/getDefaultTransaction.actions";
@@ -8,10 +8,12 @@ import { ReducersType } from "../redux/store";
 import { getExpectedTransactionAction } from "../redux/actions/getExpectedTransaction.actions";
 import { getSuccessfulTransactionAction } from "../redux/actions/getSuccessfulTransaction.actions";
 import { getTansactionSummaryAction } from "../redux/actions/getTransactionSummary.actions";
+import Spinner from "./Spinner";
 
 const DashBoard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [currentTab, setCurrentTab] = useState<tabsType>();
 
   const Dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,6 +22,10 @@ const DashBoard = () => {
   const defaultTransactionResponse = useSelector(
     (state: ReducersType) => state.defaultTransaction
   );
+  const expectedTransactionResponse = useSelector(
+    (state: ReducersType) => state.expectedTransaction
+  );
+
   type tabsType =
     | "SUMMARY"
     | "SUCCESFUL TRANSACTIONS"
@@ -33,6 +39,15 @@ const DashBoard = () => {
     "DEFAULTS",
   ];
 
+  type TransactionType = {
+    amount: number;
+    customer: {
+      lastName: string;
+      firstName: string;
+    };
+    transactionType: string;
+  };
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -43,8 +58,6 @@ const DashBoard = () => {
   };
 
   const getTransactionsHandler = (tab: tabsType) => {
-    console.log(tab);
-    
     if (tab === "SUCCESFUL TRANSACTIONS") {
       if (token === null) {
         return navigate("/");
@@ -53,6 +66,7 @@ const DashBoard = () => {
       }
     }
     if (tab === "EXPECTED TRANSACTIONS") {
+      setCurrentTab("EXPECTED TRANSACTIONS");
       if (token === null) {
         return navigate("/");
       } else {
@@ -75,8 +89,20 @@ const DashBoard = () => {
     }
   };
 
-//   console.log(defaultTransactionResponse);
-// console.log(token);
+  // useEffect(() => {
+  //   if (token === null) {
+  //     return navigate("/");
+  //   } else {
+  //     Dispatch(getExpectedTransactionAction(token) as never);
+  //   }
+  // }, []);
+
+  const expectedTransactions =
+    expectedTransactionResponse.serverResponse.value?.data;
+
+
+    const loading = expectedTransactionResponse.loading;
+  // console.log(token);
 
   return (
     <div className="relative min-h-screen md:flex">
@@ -163,7 +189,7 @@ const DashBoard = () => {
               <li
                 key={index}
                 className="me-2 cursor-pointer"
-                onClick={getTransactionsHandler.bind(null, tabs)}
+                onClick={getTransactionsHandler.bind(this, tab)}
               >
                 <span className=" p-2   border-b-2 border-transparent rounded-t-lg hover:text-[#335F32] hover:border-[#335F32] ">
                   {tab}
@@ -171,6 +197,69 @@ const DashBoard = () => {
               </li>
             ))}
           </ul>
+        </div>
+
+        <div className="relative overflow-x-auto mt-6">
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" className="px-6 py-3">
+                  id
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Customer
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Amount
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Type
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Property
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Plan
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Due Date
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Days Overdue
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {loading && <Spinner />}
+              {currentTab === "EXPECTED TRANSACTIONS" && !loading && (
+                <>
+                  {expectedTransactions?.map(
+                    (transaction: TransactionType, index) => (
+                      <tr
+                        key={index}
+                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                      >
+                        <th
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        >
+                          {index + 1}
+                        </th>
+                        <td className="px-6 py-4">
+                          {transaction.customer.firstName}{" "}
+                          {transaction.customer.lastName}
+                        </td>
+                        <td className="px-6 py-4">{transaction.amount}</td>
+                        <td className="px-6 py-4">
+                          {transaction.transactionType}
+                        </td>
+                      </tr>
+                    )
+                  )}
+                </>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
