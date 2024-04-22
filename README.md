@@ -9,6 +9,12 @@ Node.js (version 12.x or higher)
 npm (Node Package Manager) 
 
 
+CLONE THE REPO
+git clone https://github.com/keedwill/prince-giddaa-test
+
+Navigate to the project directory
+
+
 Install Modules
 npm install
 
